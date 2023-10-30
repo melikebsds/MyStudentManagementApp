@@ -11,6 +11,13 @@ namespace MyStudentManagementApp
         public AutoMapper()
         {
             CreateMap<Student, StudentDto>();
+            CreateMap<StudentDto, Student>();
+            
+            CreateMap<Attendance, AttendanceDto>();
+            CreateMap<AttendanceDto, Attendance>();
+
+            CreateMap<Grade, GradeDto>();
+            CreateMap<GradeDto, Grade>();
         }
     }
 }

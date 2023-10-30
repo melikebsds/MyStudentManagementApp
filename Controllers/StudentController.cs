@@ -49,14 +49,11 @@ namespace MyStudentManagementApp.Controllers
             return CreatedAtAction(nameof(GetStudentById), new { id = createdStudent.StudentID }, createdStudent);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<StudentDto>> UpdateStudent(int id, Student student)
+        [HttpPut]
+        public async Task<ActionResult<StudentDto>> UpdateStudent([FromBody] StudentDto student)
         {
-            if (id != student.StudentID)
-            {
-                return BadRequest();
-            }
-            var updatedStudent = await _studentRepository.UpdateStudentAsync(id, student);
+
+            var updatedStudent = await _studentRepository.UpdateStudentAsync(student);
             if (updatedStudent == null)
             {
                 return NotFound();

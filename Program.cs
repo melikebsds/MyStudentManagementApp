@@ -3,6 +3,7 @@ global using MyStudentManagementApp.Models;
 global using MyStudentManagementApp.DTOs;
 global using MyStudentManagementApp.Interfaces;
 global using MyStudentManagementApp.Data;
+using MyStudentManagementApp.Data.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddScoped<IStudentRepository, MyStudentManagementApp.Data.Repositories.StudentRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+builder.Services.AddScoped<IGradeRepository, GradeRepository>();
 
 
 var app = builder.Build();

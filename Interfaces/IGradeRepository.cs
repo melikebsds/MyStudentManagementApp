@@ -7,6 +7,10 @@ namespace MyStudentManagementApp.Interfaces
 {
     public interface IGradeRepository
     {
-        
+        Task<List<GradeDto>> GetAllGradesAsync();
+        Task<GradeDto> GetGradeByIdAsync(int id);
+        Task<GradeDto> CreateGradeAsync(Grade grade);
+        Task<GradeDto> UpdateGradeAsync(GradeDto grade);
+        Task<bool> DeleteGradeAsync(int id);
     }
 }

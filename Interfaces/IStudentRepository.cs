@@ -12,7 +12,7 @@ namespace MyStudentManagementApp.Interfaces
         Task<List<StudentDto>> GetAllStudentsAsync();
         Task<StudentDto> GetStudentByIdAsync(int id);
         Task<StudentDto> CreateStudentAsync(Student student);
-        Task<StudentDto> UpdateStudentAsync(int id, Student student);
+        Task<StudentDto> UpdateStudentAsync(StudentDto student);
         Task<bool> DeleteStudentAsync(int id);
     }
 }

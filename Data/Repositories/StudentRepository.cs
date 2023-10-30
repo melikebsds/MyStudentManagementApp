@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 
-using MyStudentManagementApp.Models;
-
 namespace MyStudentManagementApp.Data.Repositories
 {
     public class StudentRepository : IStudentRepository
@@ -26,7 +24,7 @@ namespace MyStudentManagementApp.Data.Repositories
         
         public async Task<StudentDto> GetStudentByIdAsync(int id)
         {
-            var student = await _context.Students.FirstOrDefaultAsync(s => s.StudentID == id);
+            var student = await _context.Students.AsNoTracking().FirstOrDefaultAsync(s => s.StudentID == id);
             return _mapper.Map<StudentDto>(student);
         }
 
@@ -37,19 +35,19 @@ namespace MyStudentManagementApp.Data.Repositories
             return _mapper.Map<StudentDto>(student);
         }
         
-        public async Task<StudentDto> UpdateStudentAsync(int id, Student student)
+        public async Task<StudentDto> UpdateStudentAsync(StudentDto student)
         {
-            var existingStudent = await _context.Students.FirstOrDefaultAsync(s => s.StudentID == id);
+            var existingStudent = await _context.Students.FirstOrDefaultAsync(s => s.StudentID == student.StudentID);
             if (existingStudent == null)
             {
                 return null;
-            }
+            }        
 
             _mapper.Map(student, existingStudent);
+            _context.Students.Update(existingStudent);
 
             await _context.SaveChangesAsync();
-
-            return _mapper.Map<StudentDto>(existingStudent);
+            return _mapper.Map<StudentDto>(student);;       
         }
 
         public async Task<bool> DeleteStudentAsync(int id)

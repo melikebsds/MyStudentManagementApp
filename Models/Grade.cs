@@ -10,5 +10,7 @@ namespace MyStudentManagementApp.Models
     {
         [Key]
         public int GradeID { get; set; }
+        public int StudentID { get; set; }
+        public decimal Score { get; set; }
     }
 }
